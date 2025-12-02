@@ -1,7 +1,5 @@
-# Базовый образ с PHP и Apache
 FROM php:8.3-apache
 
-# Устанавливаем необходимые пакеты
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -12,26 +10,23 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     && docker-php-ext-install pdo_mysql mbstring zip gd
 
-# Включаем mod_rewrite для Apache
 RUN a2enmod rewrite
 
-# Устанавливаем Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Копируем проект в контейнер
-COPY . /var/www/html
-
-# Устанавливаем рабочую директорию
 WORKDIR /var/www/html
 
-# Устанавливаем права на storage и bootstrap/cache
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Копируем только public в корень веб-сервера
+COPY ./public /var/www/html
 
-# Устанавливаем зависимости PHP через Composer
+# Но весь остальной проект копируем в отдельную папку
+COPY . /app
+
+WORKDIR /app
 RUN composer install --no-dev --optimize-autoloader
 
-# Expose порт 80
+RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
+
 EXPOSE 80
 
-# Команда для запуска Apache в контейнере
 CMD ["apache2-foreground"]
