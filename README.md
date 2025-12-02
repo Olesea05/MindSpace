@@ -35,7 +35,7 @@ A simple portfolio website for psychologist **Tatiana Ghincu** built with Larave
 - Blade templating
 - Bootstrap 5
 - Vite + laravel-vite-plugin for front-end asset bundling
-- MySQL (default) — SQLite supported for local dev
+- MySQL (default)
 - Node 20+ for Vite
 
 ---
@@ -45,7 +45,7 @@ A simple portfolio website for psychologist **Tatiana Ghincu** built with Larave
 - PHP 8.3+
 - Composer
 - Node 20+ and npm/yarn
-- MySQL 5.7+/8.0+ (or SQLite for testing/dev)
+- MySQL 5.7+/8.0+
 
 ---
 
