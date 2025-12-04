@@ -2,12 +2,12 @@
 
 Watch a quick demo of the site here: https://youtu.be/4zXCBLEIhhQ
 
-MindSpace is a small portfolio/demo site built with Laravel and Blade. It includes a public-facing home, an appointment booking form, and a reviews page where visitors can submit feedback.
+MindSpace is a small portfolio site built with Laravel. It includes a public-facing home, an appointment booking form, and a reviews page where visitors can submit feedback.
 
 Quick highlights:
 
 - Reviews: visitors can submit a rating (1–5) and message; reviews are saved to the database and shown on the site.
-- Appointments: simple booking form saved to DB with optional email notification.
+- Appointments: booking form saved to DB with optional email notification.
 - Stack: PHP 8.3, Laravel 12, Bootstrap 5, Vite (Node 20+), MySQL by default.
 
 Quick start (dev):
@@ -45,6 +45,4 @@ License & Author
 
 This project is MIT licensed.
 
-Author: Olesea05 (not Татьяна)
-
-If you want screenshots, deployment instructions, or CI examples added, tell me which and I’ll include them.
+Author: Olesea05
