@@ -1,184 +1,50 @@
-# MindSpace — Psychologist Portfolio Website
+# MindSpace — Psychologist Portfolio
 
-A simple portfolio website for psychologist **Tatiana Ghincu** built with Laravel, Blade and Bootstrap. This project is intended as a portfolio and a learning example showcasing Laravel features like forms, validation, migrations, and simple email notifications.
+Watch a quick demo of the site here: https://youtu.be/4zXCBLEIhhQ
 
----
+MindSpace is a small portfolio/demo site built with Laravel and Blade. It includes a public-facing home, an appointment booking form, and a reviews page where visitors can submit feedback.
 
-## Contents
+Quick highlights:
 
-- Features
-- Tech stack
-- Quick start (development)
-- Production build & deployment
-- Project structure
-- Reviews & Appointments overview
-- Troubleshooting & common issues
-- Contributing
-- License
+- Reviews: visitors can submit a rating (1–5) and message; reviews are saved to the database and shown on the site.
+- Appointments: simple booking form saved to DB with optional email notification.
+- Stack: PHP 8.3, Laravel 12, Bootstrap 5, Vite (Node 20+), MySQL by default.
 
----
-
-## Features
-
-- Home and About pages.
-- Appointment booking form (saves to DB and sends notification email).
-- Reviews page allowing visitors to submit reviews that are displayed immediately.
-- Simple spam protection via a honeypot and throttling.
-- Responsive UI built with Bootstrap 5 and Blade templates.
-
----
-
-## Tech stack
-
-- PHP 8.3.x
-- Laravel 12
-- Blade templating
-- Bootstrap 5
-- Vite + laravel-vite-plugin for front-end asset bundling
-- MySQL (default)
-- Node 20+ for Vite
-
----
-
-## Prerequisites
-
-- PHP 8.3+
-- Composer
-- Node 20+ and npm/yarn
-- MySQL 5.7+/8.0+
-
----
-
-## Quick Start (local development)
-
-1. Clone repository and install PHP dependencies:
+Quick start (dev):
 
 ```bash
 git clone https://github.com/yourusername/mindspace.git
 cd mindspace
 composer install
-```
-
-2. Copy `.env.example` and set an application key and DB credentials:
-
-```bash
 cp .env.example .env
 php artisan key:generate
-```
-
-Edit `.env` and set DB variables (for MySQL):
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=mindspace
-DB_USERNAME=root
-DB_PASSWORD=
-```
-
-> Optional: using SQLite locally — set `DB_CONNECTION=sqlite` and `DB_DATABASE=/absolute/path/to/database.sqlite` then create the file with `touch database/database.sqlite`.
-
-3. Install node deps and run the Vite dev server:
-
-```bash
+# configure DB in .env (MySQL recommended)
+php artisan migrate
 npm install
 npm run dev
-```
-
-> Note: Vite requires Node >= 20. If you see errors referencing `crypto.hash is not a function`, upgrade Node.
-
-4. Run migrations and start the Laravel dev server:
-
-```bash
-php artisan migrate
 php artisan serve
 ```
 
-Open http://127.0.0.1:8000.
+Open http://127.0.0.1:8000
 
----
+If you need to switch to SQLite for quick local testing, set `DB_CONNECTION=sqlite` and point `DB_DATABASE` to a `database/database.sqlite` file (create it with `touch database/database.sqlite`).
 
-## Production build & deployment
+Troubleshooting tips:
 
-Build assets and optimize Laravel for production:
+- If Vite errors appear, ensure `node -v` is >= 20.
+- For DB errors, verify `.env` DB_ values and that the DB server is reachable.
+- Check `storage/logs/laravel.log` for server-side errors.
 
-```bash
-npm ci
-npm run build
-composer install --no-dev --optimize-autoloader
-php artisan migrate --force
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-```
-
-Make sure your web server serves `public/` and the built assets are available (e.g. `public/build`).
-
----
-
-## Project structure & key files
-
-- `routes/web.php` — web routes
-- `app/Http/Controllers/AppointmentController.php` — appointment logic
-- `app/Http/Controllers/ReviewController.php` — review logic
-- `app/Models/Appointment.php`, `app/Models/Review.php` — models
-- `resources/views/layouts/app.blade.php` — main Laravel layout
-- `resources/views/*.blade.php` — site pages (home, about, reviews, appointment)
-- `resources/css/*` — CSS assets (Tailwind + custom)
-- `database/migrations/` — DB migrations for reviews and appointments
-
----
-
-## Reviews behavior
-
-- Visit `/reviews` to view reviews and submit a new one.
-- Required fields: `email`, `message`, `rating` (1–5). `name` and `phone` are optional.
-- Reviews are saved in DB and sorted by `created_at desc`.
-- Spam protection: a hidden `website` field (honeypot) and submission throttling (3 per minute).
-
----
-
-## Common issues / Troubleshooting
-
-- Vite / Node errors: Ensure `node -v` is >= 20. If not, upgrade Node (nvm recommended).
-- `manifest.json not found`: Run `npm run build` before deploying; or run `npm run dev` for development and HMR.
-- DB connection errors (SQLSTATE 2002, access denied): Check `.env` DB_* credentials and ensure DB server is reachable.
-- Server returns 500: Check `storage/logs/laravel.log` for full error details.
-
-Useful commands:
-
-```bash
-php artisan view:clear
-php artisan config:clear
-php artisan cache:clear
-php artisan route:clear
-php artisan migrate:status
-```
-
----
-
-## Testing
-
-Run tests with Laravel's test runner:
+Testing:
 
 ```bash
 php artisan test
 ```
 
----
+License & Author
 
-## Contributing
+This project is MIT licensed.
 
-- Fork the repository and open a pull request. Keep PRs focused and include a description.
-- Add tests where possible.
+Author: Olesea05 (not Татьяна)
 
----
-
-## Attribution & License
-
-This project is a portfolio piece created by Tatiana (repo owner). Verified under the MIT License (see `LICENSE`).
-
----
-
-Thanks for checking out MindSpace! If you want any additional sections (screenshots, quick demo, advanced deploy instructions) — tell me what you'd like and I’ll add it.
+If you want screenshots, deployment instructions, or CI examples added, tell me which and I’ll include them.
